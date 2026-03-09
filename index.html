@@ -1909,8 +1909,30 @@ Reach out and we'll find the right approach for your situation.</div>
         }
       });
     }
+    // Update URL hash (silently skip in iframe previews where pushState is blocked)
+    try { history.pushState(null, '', '#' + id); } catch(e) {}
     window.scrollTo({ top: document.getElementById('tabs').offsetTop - 10, behavior:'smooth' });
   }
+
+  // On load: read hash and open correct tab
+  (function() {
+    var validTabs = ['aboutus','packages','addons','compare','faq','diagnostic','contact'];
+    var hash = window.location.hash.replace('#', '');
+    if (hash && validTabs.indexOf(hash) !== -1) {
+      goTab(hash, null);
+    }
+  })();
+
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', function() {
+    var validTabs = ['aboutus','packages','addons','compare','faq','diagnostic','contact'];
+    var hash = window.location.hash.replace('#', '');
+    if (hash && validTabs.indexOf(hash) !== -1) {
+      goTab(hash, null);
+    } else {
+      goTab('aboutus', null);
+    }
+  });
 
   // -- PROCESS ACCORDION --
   function toggleProcess(el) {
