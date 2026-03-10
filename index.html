@@ -1077,7 +1077,7 @@
         <li>Monthly executive summary with key insights</li>
         <li>Continuous advisory support</li>
         <li>Management coaching &amp; operational guidance</li>
-        <li class="note">Does not requires existing TSpoonLab setup</li>
+        <li class="note">Does not require existing TSpoonLab setup</li>
       </ul>
 
       <div class="pkg-process-toggle" onclick="toggleProcess(this)">
@@ -2094,16 +2094,21 @@ Reach out and we'll find the right approach for your situation.</div>
   }
 
   function updateDiagProgress() {
-    var answered = Object.keys(areaScores).length;
-    var pct = (answered / AREAS_TOTAL) * 100;
+    var answered = Object.keys(qScores).length;
+    var pct = (answered / Q_TOTAL) * 100;
     document.getElementById('diagProgressBar').style.width = pct + '%';
-    document.getElementById('diagProgressLabel').textContent = answered + ' of ' + AREAS_TOTAL + ' areas scored';
+    document.getElementById('diagProgressLabel').textContent = answered + ' of ' + Q_TOTAL + ' questions answered';
     var btn = document.getElementById('diagSubmitBtn');
-    if (answered === AREAS_TOTAL) {
+    if (answered >= Q_TOTAL) {
       btn.disabled = false;
       btn.style.opacity = '1';
       btn.style.cursor = 'pointer';
-      document.getElementById('diagSubmitNote').textContent = 'All areas scored  -  ready to see results';
+      document.getElementById('diagSubmitNote').textContent = 'All questions answered - ready to see results';
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = '.4';
+      btn.style.cursor = 'not-allowed';
+      document.getElementById('diagSubmitNote').textContent = 'Answer all questions to unlock your results';
     }
   }
 
@@ -2141,6 +2146,9 @@ Reach out and we'll find the right approach for your situation.</div>
     var rawTotal = 0;
     Object.keys(areaAvgScores).forEach(function(k) { rawTotal += areaAvgScores[k]; });
     var total = Math.round(rawTotal);
+
+    // Build rounded per-area scores for display (1-5 scale, rounded)
+    Object.keys(areaAvgScores).forEach(function(k) { areaScores[k] = Math.round(areaAvgScores[k]); });
 
     // 2. Maturity %
     var maturityPct = Math.round((total / 25) * 100);
