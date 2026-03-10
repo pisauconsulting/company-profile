@@ -41,7 +41,7 @@
   header {
     position:relative; z-index:10;
     text-align:center;
-    padding:64px 24px 35px;
+    padding:64px 24px 48px;
     border-bottom: 1px solid var(--border);
     background: transparent;
     isolation: isolate;
@@ -528,14 +528,14 @@
 
   /* score buttons */
   .diag-score-row {
-    display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px;
+    display:flex; gap:5px; flex-wrap:nowrap; margin-bottom:16px;
   }
   .diag-score-row label {
     font-size:9px; letter-spacing:1.5px; color:var(--muted);
     text-transform:uppercase; display:block; margin-bottom:8px;
   }
   .diag-score-btn {
-    flex:1; min-width:80px; padding:14px 8px;
+    flex:1; min-width:0; padding:10px 4px;
     background:rgba(255,255,255,.03); border:1px solid rgba(220,164,66,.15);
     border-radius:3px; cursor:pointer; text-align:center;
     transition:all .18s; color:var(--muted);
@@ -547,13 +547,13 @@
   }
   .diag-score-btn .score-num {
     font-family:'Cormorant Garamond',serif;
-    font-size:28px; font-weight:700; color:var(--gold);
+    font-size:20px; font-weight:700; color:var(--gold);
     display:block; line-height:1;
   }
   .diag-score-btn.selected .score-num { color:var(--gold-light,#E8A820); }
   .diag-score-btn .score-label {
-    font-size:8px; letter-spacing:1px; text-transform:uppercase;
-    margin-top:4px; display:block;
+    font-size:7px; letter-spacing:.5px; text-transform:uppercase;
+    margin-top:3px; display:block;
   }
 
   /* questions inside card */
@@ -593,9 +593,18 @@
   .diag-revenue-input-wrap {
     display:flex; align-items:center; gap:12px; flex-wrap:wrap;
   }
-  .diag-revenue-prefix {
-    font-size:13px; color:var(--gold); font-weight:600; white-space:nowrap;
+  .diag-currency-select {
+    background: rgba(220,164,66,.08); border: 1px solid rgba(220,164,66,.3);
+    border-radius: 3px; color: var(--gold); font-family: 'Montserrat', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: .5px;
+    padding: 12px 36px 12px 14px; cursor: pointer; outline: none;
+    -webkit-appearance: none; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23DCA442'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center;
+    transition: border-color .2s; min-width: 180px;
   }
+  .diag-currency-select option { background: #1a1a1a; color: var(--text); padding: 8px; }
+  .diag-currency-select:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(220,164,66,.12); }
   .diag-revenue-input {
     flex:1; min-width:200px; background:rgba(220,164,66,.06);
     border:1px solid rgba(220,164,66,.3); border-radius:3px;
@@ -749,7 +758,7 @@
 
 
   .diag-addons-block { background:var(--card); border:1px solid var(--border); border-radius:4px; padding:24px 28px; margin-top:16px; }
-  .diag-addons-header { margin-bottom:14px; }
+  .diag-addons-header { margin-bottom:16px; }
   .diag-addons-intro { font-size:12px; color:var(--muted); margin-top:6px; }
   .diag-addon-item { padding:14px 0; border-bottom:1px solid rgba(255,255,255,.05); }
   .diag-addon-item:last-child { border-bottom:none; padding-bottom:0; }
@@ -1068,7 +1077,7 @@
         <li>Monthly executive summary with key insights</li>
         <li>Continuous advisory support</li>
         <li>Management coaching &amp; operational guidance</li>
-        <li class="note">Requires existing TSpoonLab setup</li>
+        <li class="note">Does not requires existing TSpoonLab setup</li>
       </ul>
 
       <div class="pkg-process-toggle" onclick="toggleProcess(this)">
@@ -1135,7 +1144,7 @@
         <div class="process-step">
           <div class="ps-col"><div class="ps-num">1</div><div class="ps-line"></div></div>
           <div class="ps-body">
-            <div class="ps-phase">Menu Analysis &amp; Development</div>
+            <div class="ps-phase">Days 1–5 · Menu Analysis &amp; Development</div>
             <div class="ps-title">Client Briefing &amp; Initial Menu Design</div>
             <div class="ps-desc">Deep-dive client meetings to understand concept, target audience, and culinary vision. Market analysis and initial menu structure design. Ingredient and supplier identification.</div>
             <span class="ps-tag">Concept Brief</span><span class="ps-tag">Initial Menu Draft</span>
@@ -1145,7 +1154,7 @@
         <div class="process-step">
           <div class="ps-col"><div class="ps-num">2</div><div class="ps-line"></div></div>
           <div class="ps-body">
-            <div class="ps-phase">Testing &amp; Refinement</div>
+            <div class="ps-phase">Days 6–15 · Testing &amp; Refinement</div>
             <div class="ps-title">Recipe Testing &amp; Dish Refinement</div>
             <div class="ps-desc">Hands-on recipe testing, dish refinement, and final menu validation. Cost breakdown per dish via TSpoonLab. Profit margin analysis and quality consistency checks.</div>
             <span class="ps-tag">Finalized Recipe Book</span><span class="ps-tag">Cost Breakdown per Dish</span>
@@ -1155,7 +1164,7 @@
         <div class="process-step">
           <div class="ps-col"><div class="ps-num">3</div></div>
           <div class="ps-body">
-            <div class="ps-phase">Staff Training</div>
+            <div class="ps-phase">Days 16–30 · Staff Training</div>
             <div class="ps-title">Team Training &amp; Procedures Implementation</div>
             <div class="ps-desc">Practical training for kitchen and dining staff. Implementation of standardized and efficient procedures. Final handover and operational sign-off.</div>
             <span class="ps-tag">Training Documentation</span><span class="ps-tag">Procedure SOPs</span>
@@ -1263,9 +1272,9 @@
         <tr><td>Procurement Optimization (ongoing)</td><td class="cross">—</td><td class="check hl">✦</td><td class="check">✦</td><td class="cross potential-col">—</td></tr>
         <tr style="background:rgba(200,146,10,.05);">
           <td style="color:var(--white);font-weight:500;">INVESTMENT</td>
-          <td style="color:var(--gold);font-weight:500;opacity:.65;font-style:italic">START FROM IDR 30 M</td>
-          <td class="hl" style="color:var(--gold);font-weight:500;opacity:.65;font-style:italic">START FROM IDR 30 M + 5 M/mo</td>
-          <td style="color:var(--gold);font-weight:500;opacity:.65;font-style:italic">START FROM IDR 5 M/mo</td>
+          <td style="color:var(--gold);font-weight:500;opacity:.65;font-style:italic;">START FROM IDR 30 M</td>
+          <td class="hl" style="color:var(--gold);font-weight:500;opacity:.65;font-style:italic;">START FROM IDR 30 M + 5 M/mo</td>
+          <td style="color:var(--gold);font-weight:500;opacity:.65;font-style:italic;">START FROM IDR 5 M/mo</td>
           <td style="color:var(--gold);font-weight:500%;opacity:.65;font-style:italic;">PER PROJECT</td>
         </tr>
       </tbody>
@@ -1288,11 +1297,11 @@
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">Do I need TSpoonLab before we start?<span class="faq-arrow">+</span></div>
-      <div class="faq-answer">No. Part of our scope includes setting up and configuring TSpoonLab for your operation — we handle technical onboarding and training so your team can use it effectively from day one. Note: the Advisory package does require an existing TSpoonLab setup.</div>
+      <div class="faq-answer">No. None of our packages require TSpoonLab before you start. Where system implementation is part of the scope, we handle the full setup and onboarding. Where it is not — such as Advisory or standalone add-ons — we work with whatever is already in place. Happy to discuss what fits your situation.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-question" onclick="toggleFaq(this)">Can I start with Essential and upgrade to Growth later?<span class="faq-arrow">+</span></div>
-      <div class="faq-answer">Absolutely. Many clients begin with Essential to establish their systems, then transition to Growth for ongoing monitoring. The move is seamless since all your data is already structured in our workflow.</div>
+      <div class="faq-question" onclick="toggleFaq(this)">What is the difference between Essential and Growth?<span class="faq-arrow">+</span></div>
+      <div class="faq-answer">Essential is a one-time implementation — we build your systems, standardise your cost models, and equip your team to operate with clarity. Growth includes everything in Essential, plus ongoing monthly monitoring so performance does not slip after we leave. If you want the foundation only, start with Essential. If you want the foundation plus sustained results, Growth is the right choice. Advisory can be added on top of either for executive-level oversight.</div>
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">What data do you need from us to get started?<span class="faq-arrow">+</span></div>
@@ -1304,7 +1313,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">Is the Advisory package standalone or part of a larger engagement?<span class="faq-arrow">+</span></div>
-      <div class="faq-answer">Both. It's designed for venues that already have their systems in order (TSpoonLab included) and want expert ongoing monitoring. It also naturally follows the Essential or Growth implementation as a continuation.</div>
+      <div class="faq-answer">Both. Advisory is designed for venues that already have their operational systems in place and want expert ongoing monitoring to keep performance on track — whether they came through our implementation or not. It also works as a natural continuation after a Growth engagement for clients who want sustained oversight beyond the initial project.</div>
     </div>
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">Are your services available outside Bali?<span class="faq-arrow">+</span></div>
@@ -1760,9 +1769,30 @@ Reach out and we'll find the right approach for your situation.</div>
       <!-- REVENUE INPUT -->
       <div class="diag-revenue-block">
         <h4>Monthly Revenue</h4>
-        <p>Enter your approximate monthly revenue to calculate your estimated profit leak in IDR.</p>
+        <p>Select your currency and enter your approximate monthly revenue to calculate your estimated profit leak.</p>
         <div class="diag-revenue-input-wrap">
-          <span class="diag-revenue-prefix">IDR</span>
+          <select class="diag-currency-select" id="diagCurrency" onchange="updateCurrencyPlaceholder()">
+            <option value="IDR" data-placeholder="e.g. 2500000000" data-step="100000000">IDR — Indonesian Rupiah</option>
+            <option value="USD" data-placeholder="e.g. 150000" data-step="1000">USD — US Dollar</option>
+            <option value="EUR" data-placeholder="e.g. 140000" data-step="1000">EUR — Euro</option>
+            <option value="GBP" data-placeholder="e.g. 120000" data-step="1000">GBP — British Pound</option>
+            <option value="SGD" data-placeholder="e.g. 200000" data-step="1000">SGD — Singapore Dollar</option>
+            <option value="AUD" data-placeholder="e.g. 230000" data-step="1000">AUD — Australian Dollar</option>
+            <option value="JPY" data-placeholder="e.g. 22000000" data-step="100000">JPY — Japanese Yen</option>
+            <option value="CNY" data-placeholder="e.g. 1100000" data-step="10000">CNY — Chinese Yuan</option>
+            <option value="HKD" data-placeholder="e.g. 1200000" data-step="10000">HKD — Hong Kong Dollar</option>
+            <option value="KRW" data-placeholder="e.g. 200000000" data-step="1000000">KRW — South Korean Won</option>
+            <option value="THB" data-placeholder="e.g. 5500000" data-step="100000">THB — Thai Baht</option>
+            <option value="MYR" data-placeholder="e.g. 700000" data-step="10000">MYR — Malaysian Ringgit</option>
+            <option value="PHP" data-placeholder="e.g. 8500000" data-step="100000">PHP — Philippine Peso</option>
+            <option value="INR" data-placeholder="e.g. 12500000" data-step="100000">INR — Indian Rupee</option>
+            <option value="AED" data-placeholder="e.g. 550000" data-step="10000">AED — UAE Dirham</option>
+            <option value="SAR" data-placeholder="e.g. 560000" data-step="10000">SAR — Saudi Riyal</option>
+            <option value="CAD" data-placeholder="e.g. 200000" data-step="1000">CAD — Canadian Dollar</option>
+            <option value="CHF" data-placeholder="e.g. 135000" data-step="1000">CHF — Swiss Franc</option>
+            <option value="NZD" data-placeholder="e.g. 250000" data-step="1000">NZD — New Zealand Dollar</option>
+            <option value="VND" data-placeholder="e.g. 3600000000" data-step="100000000">VND — Vietnamese Dong</option>
+          </select>
           <input class="diag-revenue-input" id="diagRevenue" type="number" placeholder="e.g. 2500000000" min="0" step="100000000"/>
         </div>
       </div>
@@ -1881,7 +1911,7 @@ Reach out and we'll find the right approach for your situation.</div>
 
       <div style="margin-bottom:22px;">
         <p style="font-size:8px;letter-spacing:3px;color:#C8920A;font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Your Rights</p>
-        <p style="font-size:12px;color:#8A8070;line-height:1.85;margin:0;">You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, please contact us directly at <a href="mailto:pisaufnbconsulting@gmail.com" style="color:var(--gold);">pisaufnbconsulting@gmail.com</a>. We will respond to all requests within a reasonable timeframe.</p>
+        <p style="font-size:12px;color:#8A8070;line-height:1.85;margin:0;">You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, please contact us directly at <a href="/cdn-cgi/l/email-protection#eb9b82988a9e8d8589888485989e879f82858cab8c868a8287c5888486" style="color:var(--gold);"><span class="__cf_email__" data-cfemail="2d5d445e4c584b434f4e42435e58415944434a6d4a404c4441034e4240">[email&#160;protected]</span></a>. We will respond to all requests within a reasonable timeframe.</p>
       </div>
       <hr style="border:none;border-top:1px solid rgba(200,146,10,0.1);margin:0 0 22px;">
 
@@ -1894,7 +1924,21 @@ Reach out and we'll find the right approach for your situation.</div>
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // -- CURRENCY SELECTOR --
+  function updateCurrencyPlaceholder() {
+    var sel = document.getElementById('diagCurrency');
+    var opt = sel.options[sel.selectedIndex];
+    var inp = document.getElementById('diagRevenue');
+    inp.placeholder = opt.getAttribute('data-placeholder');
+    inp.step        = opt.getAttribute('data-step');
+    inp.value       = '';
+  }
+  function getSelectedCurrency() {
+    var sel = document.getElementById('diagCurrency');
+    return sel ? sel.options[sel.selectedIndex].value : 'IDR';
+  }
+
   // -- TAB SWITCHING --
   function goTab(id, btn) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -2063,16 +2107,40 @@ Reach out and we'll find the right approach for your situation.</div>
     }
   }
 
-  function formatIDR(n) {
-    if (n >= 1000000000) return 'IDR ' + (n / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
-    if (n >= 1000000)    return 'IDR ' + (n / 1000000).toFixed(0) + 'M';
-    return 'IDR ' + n.toLocaleString('id-ID');
+  function formatCurrency(n, currency) {
+    var c = currency || getSelectedCurrency();
+    // Currencies with large denominations (IDR, JPY, KRW-like)
+    var large = ['IDR','JPY','PHP','KHR'];
+    if (large.indexOf(c) !== -1) {
+      if (n >= 1000000000) return c + ' ' + (n/1000000000).toFixed(1).replace(/\.0$/,'') + 'B';
+      if (n >= 1000000)    return c + ' ' + (n/1000000).toFixed(0) + 'M';
+      if (n >= 1000)       return c + ' ' + (n/1000).toFixed(0) + 'K';
+      return c + ' ' + n.toLocaleString();
+    } else {
+      // Standard currencies
+      if (n >= 1000000) return c + ' ' + (n/1000000).toFixed(2).replace(/\.?0+$/,'') + 'M';
+      if (n >= 1000)    return c + ' ' + (n/1000).toFixed(1).replace(/\.0$/,'') + 'K';
+      return c + ' ' + n.toLocaleString();
+    }
   }
+  // Keep formatIDR as alias for backward compatibility
+  function formatIDR(n) { return formatCurrency(n, 'IDR'); }
 
   function showDiagResults() {
-    // 1. Calculate total
-    var total = 0;
-    Object.keys(areaScores).forEach(function(k){ total += areaScores[k]; });
+    // 1. Calculate area averages from individual question scores (23 questions across 5 areas)
+    // Each area avg is rounded to 1 decimal (1-5 scale), summed to give total /25
+    var areaAvgScores = {};
+    Object.keys(Q_AREAS).forEach(function(aId) {
+      var qs = Q_AREAS[aId];
+      var sum = 0;
+      qs.forEach(function(qId) { sum += (qScores[qId] || 0); });
+      areaAvgScores[aId] = sum / qs.length; // raw avg per area (1-5)
+    });
+
+    // Total = sum of 5 area averages, rounded to nearest integer (max 25)
+    var rawTotal = 0;
+    Object.keys(areaAvgScores).forEach(function(k) { rawTotal += areaAvgScores[k]; });
+    var total = Math.round(rawTotal);
 
     // 2. Maturity %
     var maturityPct = Math.round((total / 25) * 100);
@@ -2094,6 +2162,7 @@ Reach out and we'll find the right approach for your situation.</div>
 
     // 5. Revenue calc
     var rev = parseFloat(document.getElementById('diagRevenue').value) || 0;
+    var currency = getSelectedCurrency();
     var lossMin = rev * leakMin;
     var lossMax = rev * leakMax;
     var lossYrMin = lossMin * 12;
@@ -2147,10 +2216,10 @@ Reach out and we'll find the right approach for your situation.</div>
 
     if (rev > 0) {
       leakHtml += '<div class="diag-leak-numbers">' +
-        '<div class="diag-leak-item"><span class="diag-leak-item-label">Monthly Loss (Min)</span><span class="diag-leak-amount">' + formatIDR(lossMin) + '</span></div>' +
-        '<div class="diag-leak-item"><span class="diag-leak-item-label">Monthly Loss (Max)</span><span class="diag-leak-amount max">' + formatIDR(lossMax) + '</span></div>' +
-        '<div class="diag-leak-item"><span class="diag-leak-item-label">Yearly Loss (Min)</span><span class="diag-leak-amount">' + formatIDR(lossYrMin) + '</span></div>' +
-        '<div class="diag-leak-item"><span class="diag-leak-item-label">Yearly Loss (Max)</span><span class="diag-leak-amount max">' + formatIDR(lossYrMax) + '</span></div>' +
+        '<div class="diag-leak-item"><span class="diag-leak-item-label">Monthly Loss (Min)</span><span class="diag-leak-amount">' + formatCurrency(lossMin, currency) + '</span></div>' +
+        '<div class="diag-leak-item"><span class="diag-leak-item-label">Monthly Loss (Max)</span><span class="diag-leak-amount max">' + formatCurrency(lossMax, currency) + '</span></div>' +
+        '<div class="diag-leak-item"><span class="diag-leak-item-label">Yearly Loss (Min)</span><span class="diag-leak-amount">' + formatCurrency(lossYrMin, currency) + '</span></div>' +
+        '<div class="diag-leak-item"><span class="diag-leak-item-label">Yearly Loss (Max)</span><span class="diag-leak-amount max">' + formatCurrency(lossYrMax, currency) + '</span></div>' +
         '</div>';
     }
 
@@ -2290,7 +2359,7 @@ Reach out and we'll find the right approach for your situation.</div>
     }).join(', ');
 
     var leakLine = Math.round(leakMin*100) + '% - ' + Math.round(leakMax*100) + '% of revenue';
-    var revLine  = rev > 0 ? formatIDR(lossMin) + ' - ' + formatIDR(lossMax) + ' per month' : 'Revenue not provided';
+    var revLine  = rev > 0 ? formatCurrency(lossMin, currency) + ' - ' + formatCurrency(lossMax, currency) + ' per month' : 'Revenue not provided';
 
     var emailBody = [
       'PISAU F&B PROFIT DIAGNOSTIC - NEW SUBMISSION',
@@ -2336,13 +2405,11 @@ Reach out and we'll find the right approach for your situation.</div>
     document.getElementById('diagProgressBar').style.width = '0%';
     document.getElementById('diagProgressLabel').textContent = '0 of 5 areas scored';
     document.getElementById('diagRevenue').value = '';
+    var sel = document.getElementById('diagCurrency');
+    if (sel) { sel.selectedIndex = 0; updateCurrencyPlaceholder(); }
     document.getElementById('diagAreaBreakdown').innerHTML = '';
     document.getElementById('diagServiceRec').innerHTML = '';
-    document.getElementById('diagCta').innerHTML = '';
-    document.getElementById('diagLeakBlock').innerHTML = '';
-    var es = document.getElementById('diagEmailStatus');
-    if (es) { es.className = 'diag-email-status'; es.textContent = ''; }
-    var btn = document.getElementById('diagSubmitBtn');
+    document.ementById('diagSubmitBtn');
     btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed';
     document.getElementById('diagSubmitNote').textContent = 'Score all 5 areas to unlock your results';
     document.querySelectorAll('.diag-score-btn').forEach(function(b){ b.classList.remove('selected'); });
@@ -2378,25 +2445,9 @@ Reach out and we'll find the right approach for your situation.</div>
     updateDiagProgress();
   }
 
-  function updateDiagProgress() {
-    var answered = Object.keys(qScores).length;
-    var pct = (answered / Q_TOTAL) * 100;
-    document.getElementById('diagProgressBar').style.width = pct + '%';
-    document.getElementById('diagProgressLabel').textContent = answered + ' of ' + Q_TOTAL + ' questions answered';
-    if (answered === Q_TOTAL) {
-      var btn = document.getElementById('diagSubmitBtn');
-      btn.disabled = false;
-      btn.style.opacity = '1';
-      btn.style.cursor = 'pointer';
-      document.getElementById('diagSubmitNote').textContent = 'All questions answered - ready to see results';
-    }
-  }
+  
 
-  function formatIDR(n) {
-    if (n >= 1000000000) return 'IDR ' + (n / 1000000000).toFixed(1).replace('.0', '') + 'B';
-    if (n >= 1000000)    return 'IDR ' + (n / 1000000).toFixed(0) + 'M';
-    return 'IDR ' + n.toLocaleString('id-ID');
-  }
+  
 
   function q(tag, attrs, inner) {
     var parts = ['<', tag];
@@ -2414,255 +2465,9 @@ Reach out and we'll find the right approach for your situation.</div>
     return Math.round(sum / qs.length);
   }
 
-  function showDiagResults() {
-    // Compute area averages then total /25
-    var total = 0;
-    var areaAvgs = {};
-    Object.keys(Q_AREAS).forEach(function(aId) {
-      var avg = getAreaScore(aId);
-      areaAvgs[aId] = avg;
-      total += avg;
-    });
+  
 
-    var maturityPct = Math.round((total / 25) * 100);
-
-    var leakMin, leakMax;
-    if      (total >= 22) { leakMin = 2;  leakMax = 4;  }
-    else if (total >= 17) { leakMin = 4;  leakMax = 7;  }
-    else if (total >= 11) { leakMin = 7;  leakMax = 11; }
-    else if (total >= 6)  { leakMin = 11; leakMax = 15; }
-    else                  { leakMin = 15; leakMax = 20; }
-
-    var tier, tierLabel;
-    if      (total >= 22) { tier = 'healthy';  tierLabel = 'Excellent - Strong Systems'; }
-    else if (total >= 17) { tier = 'risk';     tierLabel = 'Good - Leaking Profit'; }
-    else if (total >= 11) { tier = 'risk';     tierLabel = 'Moderate Inefficiencies'; }
-    else if (total >= 6)  { tier = 'critical'; tierLabel = 'Serious Inefficiencies'; }
-    else                  { tier = 'critical'; tierLabel = 'Critical Systems Failure'; }
-
-    var rev      = parseFloat(document.getElementById('diagRevenue').value) || 0;
-    var lossMin   = rev * leakMin / 100;
-    var lossMax   = rev * leakMax / 100;
-    var lossYrMin = lossMin * 12;
-    var lossYrMax = lossMax * 12;
-
-    document.getElementById('diagForm').style.display = 'none';
-    document.getElementById('diagResults').classList.add('show');
-    window.scrollTo({ top: document.getElementById('diagnostic').offsetTop + 80, behavior: 'smooth' });
-
-    // Score ring
-    document.getElementById('scoreNum').textContent = total;
-    var arcColor = tier === 'healthy' ? '#81c784' : tier === 'risk' ? '#ffca28' : '#e57373';
-    var arc = document.getElementById('scoreArc');
-    arc.setAttribute('stroke', arcColor);
-    setTimeout(function() {
-      arc.style.transition = 'stroke-dashoffset 1.4s ease';
-      arc.setAttribute('stroke-dashoffset', 477.5 * (1 - total / 25));
-    }, 200);
-    document.getElementById('scoreNum').style.fill = arcColor;
-    document.getElementById('scoreMaturity').textContent = tierLabel + ' - ' + maturityPct + '% Maturity';
-
-    // Verdict
-    document.getElementById('diagVerdictCard').className = 'diag-verdict-card ' + tier;
-    var vData = {
-      healthy:  { icon: 'OK',  title: 'Operationally Strong',     desc: 'Your operation shows solid systems and data discipline. The foundations for sustained profitability are in place. The focus now is monitoring, optimising, and ensuring gains are not eroded over time.' },
-      risk:     { icon: '(!)', title: 'Profit Leakage Identified', desc: 'Your diagnostic reveals specific, addressable gaps in one or more operational areas. These leaks are often invisible day-to-day but compound significantly over months. They are diagnosable and fixable with the right systems.' },
-      critical: { icon: '!!',  title: 'Critical Profit Risk',      desc: 'Multiple operational areas show significant weakness. Money is leaving your business every day through gaps that are largely invisible without the right infrastructure. A structured intervention can recover substantial margin quickly.' }
-    };
-    document.getElementById('verdictIcon').textContent  = vData[tier].icon;
-    document.getElementById('verdictTitle').textContent = vData[tier].title;
-    document.getElementById('verdictDesc').textContent  = vData[tier].desc;
-
-    // Profit leak block
-    var leakHtml = q('span', 'class="diag-leak-label"', 'ESTIMATED PROFIT LEAKAGE');
-    leakHtml += q('div', 'class="diag-leak-range-pct"',
-      'Based on your score of ' + q('strong', 'style="color:var(--gold)"', total + '/25') +
-      ', your estimated operational leak is ' +
-      q('strong', 'style="color:var(--gold)"', leakMin + '% - ' + leakMax + '%') + ' of revenue.');
-    if (rev > 0) {
-      leakHtml += q('div', 'class="diag-leak-numbers"',
-        q('div', 'class="diag-leak-item"', q('span', 'class="diag-leak-item-label"', 'Monthly Loss (Min)') + q('span', 'class="diag-leak-amount"', formatIDR(lossMin))) +
-        q('div', 'class="diag-leak-item"', q('span', 'class="diag-leak-item-label"', 'Monthly Loss (Max)') + q('span', 'class="diag-leak-amount max"', formatIDR(lossMax))) +
-        q('div', 'class="diag-leak-item"', q('span', 'class="diag-leak-item-label"', 'Yearly Loss (Min)')  + q('span', 'class="diag-leak-amount"',     formatIDR(lossYrMin))) +
-        q('div', 'class="diag-leak-item"', q('span', 'class="diag-leak-item-label"', 'Yearly Loss (Max)')  + q('span', 'class="diag-leak-amount max"', formatIDR(lossYrMax))));
-    }
-    leakHtml += q('div', 'class="diag-closing-stmt"',
-      '"Our role is simply to identify exactly where inside the operation that ' + leakMin + '-' + leakMax + '% sits - and build the systems to recover it."');
-    document.getElementById('diagLeakBlock').innerHTML = leakHtml;
-
-    // Area breakdown
-    var areaDetails = {
-      a1: { 5:'Menu fully engineered. Recipe costs current, contribution margin tracked.', 4:'Good menu management with minor gaps. Costing mostly current.', 3:'Partial costing. Some items priced by intuition - a full recipe cost audit is recommended.', 2:'Weak menu management. Most items priced without cost basis.', 1:'No recipe costing. Menu priced entirely by intuition. Potential leak: 2-5% of revenue.' },
-      a2: { 5:'Strong food cost control. Theoretical vs. actual tracked weekly.', 4:'Good controls with occasional gaps. Variance monitored.', 3:'Monthly monitoring only. A gap likely exists between theoretical and actual food cost.', 2:'Inconsistent monitoring. Food cost variance unquantified.', 1:'Food cost unknown. No theoretical benchmark, no variance tracking. Potential leak: 3-8%.' },
-      a3: { 5:'Fully integrated inventory and purchasing. Demand-driven ordering, digital system.', 4:'Good inventory practices with minor reactive elements.', 3:'Partial control. Counts infrequent. Purchasing partly reactive.', 2:'Weak systems. Manual inventory, reactive purchasing.', 1:'Chaotic purchasing. No formal inventory. Overstock and spoilage undetected. Leak: 2-6%.' },
-      a4: { 5:'Full SOPs in place. Staff cost-aware. Waste formally tracked. Prep efficiency measured.', 4:'Good operational discipline. SOPs mostly followed, some waste tracking.', 3:'Partial documentation. SOPs exist but inconsistently followed.', 2:'Weak systems. Ad-hoc practices. Staff not cost-trained.', 1:'No operational systems. No SOPs, no waste tracking. Leak: 1-4%.' },
-      a5: { 5:'Full data visibility. Real-time dashboards, item-level profitability live.', 4:'Good visibility. Most data accessible, minor delays or gaps.', 3:'Fragmented data. Weekly reports but systems not fully connected.', 2:'Limited visibility. Monthly reports only.', 1:'Blind operation. No real-time data, no dashboards. Leak: 3-7%.' }
-    };
-    var breakdownHtml = '';
-    ['a1','a2','a3','a4','a5'].forEach(function(aId) {
-      var sc     = areaAvgs[aId] || 1;
-      var status = sc >= 4 ? 'green' : sc >= 3 ? 'amber' : 'red';
-      var detail = areaDetails[aId][sc] || '';
-      breakdownHtml +=
-        q('div', 'class="diag-area"',
-          q('div', null, q('div', 'class="diag-area-name"', AREA_NAMES[aId]) + q('div', 'class="diag-area-detail"', detail)) +
-          q('div', 'class="diag-area-badge badge-' + status + '"', sc + '/5'));
-    });
-    document.getElementById('diagAreaBreakdown').innerHTML = breakdownHtml;
-
-    // Service recommendation
-    var recData = {
-      healthy:  {
-        label:'RECOMMENDED PACKAGE',
-        pkg:'Advisory Retainer',
-        price:'IDR 5M / month - Ongoing',
-        why:'Your systems are performing well. The Advisory Retainer keeps them that way - providing professional external monitoring that catches cost drift before it compounds, without disrupting your operation.',
-        features:['Weekly data collection & COGS validation','Monthly performance & variance report','Ongoing advisory support & management coaching','Quarterly strategic review','Early detection of system degradation'],
-        alt:'The Advisory Retainer pairs well with the Growth package if you are already in implementation, adding executive-level oversight on top.'
-      },
-      risk:     {
-        label:'RECOMMENDED PACKAGE',
-        pkg:'Essential Package',
-        price:'IDR 30M - One-time Implementation (1 to 2 months)',
-        why:'Your diagnostic shows identifiable profit leaks across one or more areas. The Essential package builds the missing data infrastructure - recipe costing, food cost benchmarks, and system integration - so leaks become visible and fixable.',
-        features:['Full POS & systems audit across all 5 F&B areas','Recipe costing database built and validated','TSpoonLab setup, configuration & staff training','Theoretical vs. actual food cost model live','Final price strategy, action plan & validation report'],
-        alt:'For sustained results, consider upgrading to the Growth package - it includes everything in Essential, plus ongoing monthly monitoring to ensure gains do not erode over time.'
-      },
-      critical: {
-        label:'RECOMMENDED PACKAGE',
-        pkg:'Growth Package',
-        price:'IDR 30M setup + IDR 5M / month',
-        why:'Your diagnostic indicates significant or critical operational gaps. The Growth package includes the full Essential implementation across all 5 areas, then transitions into monthly monitoring - ensuring the systems built are sustained and profit recovery compounds over time.',
-        features:['Full Essential implementation across all 5 areas','Recipe costing, inventory, and purchasing systems rebuilt','TSpoonLab setup, training & live validation','Waste tracking and operational SOPs implemented','Monthly COGS monitoring & variance reporting','Ongoing advisory support & management coaching'],
-        alt:'Growth is the most comprehensive path to recovery at this score level. The monthly retainer component ensures systems do not degrade after implementation.'
-      }
-    };
-    var rec = recData[tier];
-    var featItems = '';
-    rec.features.forEach(function(f) { featItems += q('li', null, f); });
-    document.getElementById('diagServiceRec').innerHTML =
-      q('div', 'class="diag-service-rec"',
-        q('span', 'class="diag-rec-label"', rec.label) +
-        q('div',  'class="diag-rec-package"', rec.pkg) +
-        q('div',  'class="diag-rec-price"',   rec.price) +
-        q('div',  'class="diag-rec-why"',     rec.why) +
-        q('ul',   'class="diag-rec-features"', featItems) +
-        q('div',  'class="diag-rec-alt"',     rec.alt));
-
-    // Add-on recommendations based on weak areas
-    var addonRecs = [];
-    if (areaAvgs.a1 <= 3) addonRecs.push({ name:'Menu Engineering Consultation', reason:'Your menu score indicates items may not be priced or positioned for maximum profitability. A dedicated menu analysis identifies your stars, dogs, plowhorses, and puzzles - and delivers clear repositioning and pricing recommendations.' });
-    if (areaAvgs.a2 <= 2) addonRecs.push({ name:'TSpoonLab Advanced Training', reason:'Your food cost score suggests the team is not fully leveraging available cost tracking tools. Advanced TSpoonLab training unlocks variance tracking, recipe locking, and real-time COGS monitoring at management level.' });
-    if (areaAvgs.a3 <= 3) addonRecs.push({ name:'Supplier Sourcing & Negotiation', reason:'Your purchasing score shows reactive procurement patterns. Our supplier sourcing service evaluates and negotiates with local suppliers in Bali - aligning procurement with quality standards and cost targets to reduce overspend at source.' });
-    if (areaAvgs.a4 <= 2) addonRecs.push({ name:'SOP Development Package', reason:'Your operational systems score indicates missing or inconsistently followed procedures. Custom SOPs for kitchen operations, purchasing, and waste management create the discipline that keeps costs in check day to day.' });
-    if (areaAvgs.a4 <= 3) addonRecs.push({ name:'Culinary Team Workshop', reason:'Your operational score suggests staff are not consistently trained in cost awareness. An intensive hands-on workshop builds cost-conscious habits on the floor - covering technique standardisation, food safety, and waste reduction.' });
-    if (areaAvgs.a5 <= 2) addonRecs.push({ name:'Quarterly Business Review', reason:'Your data visibility score shows limited access to performance insights. A structured quarterly review with benchmarks and trend analysis gives owners and investors the high-level picture that daily operations alone cannot provide.' });
-    if (areaAvgs.a3 <= 2) addonRecs.push({ name:'Kitchen Layout & Equipment Design', reason:'Your inventory and purchasing score suggests workflow and physical setup may be contributing to inefficiency. A kitchen layout review can identify equipment and flow improvements that reduce waste and improve throughput.' });
-
-    if (addonRecs.length > 0) {
-      var addonItems = '';
-      addonRecs.forEach(function(a) {
-        addonItems += q('div', 'class="diag-addon-item"',
-          q('div', 'class="diag-addon-name"', a.name) +
-          q('div', 'class="diag-addon-reason"', a.reason));
-      });
-      var addonHtml =
-        q('div', 'class="diag-addons-block"',
-          q('div', 'class="diag-addons-header"',
-            q('span', 'class="diag-rec-label"', 'RECOMMENDED ADD-ONS') +
-            q('p', 'class="diag-addons-intro"', 'Based on your specific scores, these modular add-ons can be layered onto your package to close gaps faster.')
-          ) + addonItems);
-      document.getElementById('diagServiceRec').innerHTML += addonHtml;
-    }
-
-    // CTA - direct to contact form
-    var ctaWrap = document.getElementById('diagCta');
-    ctaWrap.innerHTML = '';
-    var ctaDiv   = document.createElement('div');
-    ctaDiv.className = 'diag-cta-block';
-    var ctaH3    = document.createElement('h3');
-    var ctaP     = document.createElement('p');
-    var ctaBtns  = document.createElement('div');
-    ctaBtns.style.cssText = 'display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:8px;';
-    ctaH3.textContent = 'Ready to recover this profit?';
-    ctaP.textContent  = 'Send us your details and we will come back to you within one business day to discuss your results and next steps.';
-    var btnContact = document.createElement('button');
-    btnContact.className   = 'btn-primary';
-    btnContact.textContent = 'Get in Touch';
-    btnContact.style.cursor = 'pointer';
-    btnContact.onclick = function() { goTab('contact', null); };
-    var btnPkgs = document.createElement('button');
-    btnPkgs.className   = 'btn-secondary';
-    btnPkgs.textContent = 'View Our Packages';
-    btnPkgs.style.cursor = 'pointer';
-    btnPkgs.onclick = function() { goTab('packages', null); };
-    ctaBtns.appendChild(btnContact);
-    ctaBtns.appendChild(btnPkgs);
-    ctaDiv.appendChild(ctaH3);
-    ctaDiv.appendChild(ctaP);
-    ctaDiv.appendChild(ctaBtns);
-    ctaWrap.appendChild(ctaDiv);
-
-    // Auto-email
-    var emailStatus = document.getElementById('diagEmailStatus');
-    emailStatus.className   = 'diag-email-status sending';
-    emailStatus.textContent = 'Sending results to Pisau...';
-
-    var areaLines = Object.keys(Q_AREAS).map(function(aId) {
-      return AREA_NAMES[aId] + ': ' + areaAvgs[aId] + '/5';
-    }).join(', ');
-
-    var emailBody = [
-      'PISAU F&B PROFIT DIAGNOSTIC - NEW SUBMISSION',
-      '=============================================',
-      '',
-      'TOTAL SCORE: ' + total + '/25 - ' + tierLabel,
-      'OPERATIONAL MATURITY: ' + maturityPct + '%',
-      'ESTIMATED PROFIT LEAK: ' + leakMin + '% - ' + leakMax + '% of revenue',
-      'RECOMMENDED PACKAGE: ' + rec.pkg,
-      'SUBMITTED: ' + new Date().toLocaleString('en-GB', {timeZone:'Asia/Makassar'}) + ' WITA',
-      '',
-      'AREA SCORES: ' + areaLines,
-      '',
-      'Submitted via Pisau website profit diagnostic tool.'
-    ].join('\n');
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: '5804c5a7-75b3-4018-bf2c-9f4d43857a99',
-        subject:    'Profit Diagnostic - Score: ' + total + '/25 (' + tierLabel + ')',
-        from_name:  'Pisau Diagnostic Tool',
-        email:      'pisaufnbconsulting@gmail.com',
-        message:    emailBody
-      })
-    }).then(function(r) { return r.json(); })
-      .then(function(d) {
-        emailStatus.className   = d.success ? 'diag-email-status sent' : 'diag-email-status';
-        emailStatus.textContent = d.success ? 'Results sent to Pisau.' : '';
-      }).catch(function() { emailStatus.className = 'diag-email-status'; });
-  }
-
-  function restartDiag() {
-    qScores = {};
-    document.getElementById('diagForm').style.display = 'block';
-    document.getElementById('diagResults').classList.remove('show');
-    document.getElementById('diagProgressBar').style.width = '0%';
-    document.getElementById('diagProgressLabel').textContent = '0 of 23 questions answered';
-    document.getElementById('diagRevenue').value = '';
-    document.getElementById('diagAreaBreakdown').innerHTML = '';
-    document.getElementById('diagServiceRec').innerHTML = '';
-    document.getElementById('diagLeakBlock').innerHTML = '';
-    document.getElementById('diagCta').innerHTML = '';
-    var es = document.getElementById('diagEmailStatus');
-    if (es) { es.className = 'diag-email-status'; es.textContent = ''; }
-    var btn = document.getElementById('diagSubmitBtn');
-    btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed';
-    document.getElementById('diagSubmitNote').textContent = 'Answer all questions to unlock your results';
-    document.querySelectorAll('.diag-score-btn').forEach(function(b) { b.classList.remove('selected'); });
-    window.scrollTo({ top: document.getElementById('diagnostic').offsetTop + 80, behavior: 'smooth' });
-  }
+  
 
 </script>
 </body>
