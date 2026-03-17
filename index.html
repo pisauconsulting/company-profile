@@ -501,6 +501,45 @@
   /* ══════════ DIAGNOSTIC TOOL ══════════ */
   .diag-wrap { max-width:860px; margin:0 auto; }
 
+  /* GATING FORM */
+  .diag-gate {
+    background: var(--card); border: 1px solid var(--border); border-radius: 4px;
+    padding: 32px 28px; margin-bottom: 24px; max-width: 580px; margin-left: auto; margin-right: auto;
+  }
+  .diag-gate-title {
+    font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400;
+    color: var(--white); margin-bottom: 8px; text-align: center;
+  }
+  .diag-gate-desc {
+    font-size: 12px; color: var(--muted); line-height: 1.8; text-align: center;
+    margin-bottom: 24px;
+  }
+  .diag-gate-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .diag-gate-form .form-group { display: flex; flex-direction: column; margin-bottom: 12px; }
+  .diag-gate-form label { font-size: 9px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
+  .diag-gate-form label span { color: var(--gold); }
+  .diag-gate-form input {
+    background: #0f0f0f; border: 1px solid rgba(200,146,10,.25); border-radius: 2px;
+    color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 12px;
+    padding: 10px 14px; outline: none; transition: border-color .2s; width: 100%;
+  }
+  .diag-gate-form input:focus { border-color: var(--gold); }
+  .diag-gate-form input::placeholder { color: var(--muted); }
+  .diag-gate-btn {
+    width: 100%; padding: 13px; background: var(--gold); border: none; border-radius: 2px;
+    color: var(--black); font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: all .2s; margin-top: 6px;
+  }
+  .diag-gate-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .diag-gate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .diag-gate-msg {
+    display: none; font-size: 11px; padding: 10px 14px; border-radius: 2px; margin-top: 12px; text-align: center;
+  }
+  .diag-locked {
+    opacity: 0.3; pointer-events: none; user-select: none; filter: blur(2px);
+  }
+  @media(max-width:500px){ .diag-gate-form .form-row { grid-template-columns: 1fr; } }
+
   /* intro */
   .diag-intro { text-align:center; margin-bottom:40px; }
   .diag-intro p { font-size:13px; color:var(--muted); line-height:1.8; max-width:600px; margin:0 auto; }
@@ -1472,7 +1511,38 @@ Reach out and we'll find the right approach for your situation.</div>
   <p class="section-desc">Answer each question honestly. Rate yourself 1 to 5. See your total score, your estimated profit leak, and what to do next.</p>
 
   <div class="diag-wrap">
-    <div id="diagForm">
+
+    <!-- GATING FORM -->
+    <div id="diagGate" class="diag-gate">
+      <h3 class="diag-gate-title">Stop Your Monthly Profit Leak</h3>
+      <p class="diag-gate-desc">Even busy F&B operations lose significant revenue every month to unmanaged gaps in inventory, labor, and menu costs. Use this diagnostic to pinpoint exactly where your margins are thinning before your next service begins.</p>
+      
+      <div class="diag-gate-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name <span>*</span></label>
+            <input type="text" id="gate-fname" placeholder="First" />
+          </div>
+          <div class="form-group">
+            <label>Last Name <span>*</span></label>
+            <input type="text" id="gate-lname" placeholder="Last" />
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Email Address <span>*</span></label>
+          <input type="email" id="gate-email" placeholder="your@email.com" />
+        </div>
+        
+        <div id="gate-msg" class="diag-gate-msg"></div>
+        
+        <button class="diag-gate-btn" id="gate-btn" onclick="unlockDiagnostic()">
+          CALCULATE MY PROFIT LEAK
+        </button>
+      </div>
+    </div>
+
+    <div id="diagForm" class="diag-locked">
 
       <div class="diag-intro">
         <p>Rate each question from <strong style="color:var(--gold)">1 (not in place)</strong> to <strong style="color:var(--gold)">5 (fully optimised)</strong>. The diagnostic takes 3 to 5 minutes.</p>
@@ -2074,6 +2144,69 @@ Reach out and we'll find the right approach for your situation.</div>
 
 
   // ========== DIAGNOSTIC TOOL ==========
+  // Store user gating data
+  var diagUserData = {
+    fname: '',
+    lname: '',
+    email: ''
+  };
+
+  // Unlock diagnostic function
+  function unlockDiagnostic() {
+    var fname = document.getElementById('gate-fname').value.trim();
+    var lname = document.getElementById('gate-lname').value.trim();
+    var email = document.getElementById('gate-email').value.trim();
+    var msgEl = document.getElementById('gate-msg');
+    var btn = document.getElementById('gate-btn');
+
+    // Validation
+    if (!fname || !lname || !email) {
+      msgEl.style.display = 'block';
+      msgEl.style.background = 'rgba(180,60,60,.15)';
+      msgEl.style.border = '1px solid rgba(180,60,60,.3)';
+      msgEl.style.color = '#e57373';
+      msgEl.textContent = 'Please fill in all required fields.';
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      msgEl.style.display = 'block';
+      msgEl.style.background = 'rgba(180,60,60,.15)';
+      msgEl.style.border = '1px solid rgba(180,60,60,.3)';
+      msgEl.style.color = '#e57373';
+      msgEl.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    // Store user data
+    diagUserData.fname = fname;
+    diagUserData.lname = lname;
+    diagUserData.email = email;
+
+    // Show success message
+    btn.textContent = 'Unlocking...';
+    btn.disabled = true;
+
+    setTimeout(function() {
+      msgEl.style.display = 'block';
+      msgEl.style.background = 'rgba(60,140,60,.15)';
+      msgEl.style.border = '1px solid rgba(60,140,60,.3)';
+      msgEl.style.color = '#81c784';
+      msgEl.textContent = 'Success! Diagnostic tool unlocked.';
+
+      setTimeout(function() {
+        // Hide gate, show form
+        document.getElementById('diagGate').style.display = 'none';
+        document.getElementById('diagForm').classList.remove('diag-locked');
+        
+        // Scroll to diagnostic
+        window.scrollTo({
+          top: document.getElementById('diagForm').offsetTop - 100,
+          behavior: 'smooth'
+        });
+      }, 800);
+    }, 400);
+  }
+
   var areaScores = {};
   var AREAS_TOTAL = 5;
 
@@ -2372,6 +2505,11 @@ Reach out and we'll find the right approach for your situation.</div>
       'PISAU F&B PROFIT DIAGNOSTIC - NEW SUBMISSION',
       '============================================',
       '',
+      '--- USER INFORMATION ---',
+      'NAME: ' + diagUserData.fname + ' ' + diagUserData.lname,
+      'EMAIL: ' + diagUserData.email,
+      '',
+      '--- DIAGNOSTIC RESULTS ---',
       'TOTAL SCORE: ' + total + '/25 - ' + tierLabel,
       'OPERATIONAL MATURITY: ' + maturityPct + '%',
       'ESTIMATED PROFIT LEAK: ' + leakLine,
@@ -2391,9 +2529,10 @@ Reach out and we'll find the right approach for your situation.</div>
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
         access_key: '5804c5a7-75b3-4018-bf2c-9f4d43857a99',
-        subject: 'Profit Diagnostic  -  Score: ' + total + '/25 (' + tierLabel + ') / Leak: ' + leakLine,
+        subject: 'Profit Diagnostic - ' + diagUserData.fname + ' ' + diagUserData.lname + ' | Score: ' + total + '/25 (' + tierLabel + ')',
         from_name: 'Pisau Diagnostic Tool',
-        email: 'pisaufnbconsulting@gmail.com',
+        name: diagUserData.fname + ' ' + diagUserData.lname,
+        email: diagUserData.email,
         message: emailBody
       })
     }).then(function(r){ return r.json(); })
@@ -2407,19 +2546,23 @@ Reach out and we'll find the right approach for your situation.</div>
 
   function restartDiag() {
     areaScores = {};
+    qScores = {};
     document.getElementById('diagForm').style.display = 'block';
     document.getElementById('diagResults').classList.remove('show');
     document.getElementById('diagProgressBar').style.width = '0%';
-    document.getElementById('diagProgressLabel').textContent = '0 of 5 areas scored';
+    document.getElementById('diagProgressLabel').textContent = '0 of 23 questions answered';
     document.getElementById('diagRevenue').value = '';
     var sel = document.getElementById('diagCurrency');
     if (sel) { sel.selectedIndex = 0; updateCurrencyPlaceholder(); }
     document.getElementById('diagAreaBreakdown').innerHTML = '';
     document.getElementById('diagServiceRec').innerHTML = '';
-    document.ementById('diagSubmitBtn');
+    var btn = document.getElementById('diagSubmitBtn');
     btn.disabled = true; btn.style.opacity = '0.4'; btn.style.cursor = 'not-allowed';
-    document.getElementById('diagSubmitNote').textContent = 'Score all 5 areas to unlock your results';
+    document.getElementById('diagSubmitNote').textContent = 'Answer all questions to unlock your results';
     document.querySelectorAll('.diag-score-btn').forEach(function(b){ b.classList.remove('selected'); });
+    
+    // Note: User data (diagUserData) is preserved - no need to re-enter details
+    
     window.scrollTo({ top: document.getElementById('diagnostic').offsetTop + 80, behavior: 'smooth' });
   }  // === DIAGNOSTIC TOOL ===
   var qScores = {};
