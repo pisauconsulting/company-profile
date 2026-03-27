@@ -815,6 +815,7 @@
     .diag-revenue-block { padding:20px 18px; }
   }
 </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 
@@ -1981,7 +1982,7 @@ Reach out and we'll find the right approach for your situation.</div>
 
       <div style="margin-bottom:22px;">
         <p style="font-size:8px;letter-spacing:3px;color:#C8920A;font-family:'Montserrat',sans-serif;font-weight:700;text-transform:uppercase;margin-bottom:8px;">Your Rights</p>
-        <p style="font-size:12px;color:#8A8070;line-height:1.85;margin:0;">You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, please contact us directly at <a href="/cdn-cgi/l/email-protection#eb9b82988a9e8d8589888485989e879f82858cab8c868a8287c5888486" style="color:var(--gold);"><span class="__cf_email__" data-cfemail="2d5d445e4c584b434f4e42435e58415944434a6d4a404c4441034e4240">[email&#160;protected]</span></a>. We will respond to all requests within a reasonable timeframe.</p>
+        <p style="font-size:12px;color:#8A8070;line-height:1.85;margin:0;">You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, please contact us directly at pisaufnbconsulting@gmail.com. We will respond to all requests within a reasonable timeframe.</p>
       </div>
       <hr style="border:none;border-top:1px solid rgba(200,146,10,0.1);margin:0 0 22px;">
 
@@ -1994,7 +1995,7 @@ Reach out and we'll find the right approach for your situation.</div>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // -- CURRENCY SELECTOR --
   function updateCurrencyPlaceholder() {
     var sel = document.getElementById('diagCurrency');
@@ -2427,7 +2428,7 @@ Reach out and we'll find the right approach for your situation.</div>
       healthy: {
         label: 'RECOMMENDED SERVICE',
         package: 'Advisory Retainer',
-        price: 'IDR 5M / month / Ongoing',
+        price: '',
         why: 'Your systems are working. The Advisory retainer adds professional external monitoring that catches cost drift before it compounds  -  without disrupting your existing operation.',
         features: [
           'Weekly data collection & COGS validation',
@@ -2441,7 +2442,7 @@ Reach out and we'll find the right approach for your situation.</div>
       risk: {
         label: 'RECOMMENDED SERVICE',
         package: 'Essential Package',
-        price: 'IDR 30M setup / 1-2 months',
+        price: '',
         why: 'You have identifiable leaks that need to be systematically closed. Essential builds the missing data infrastructure across all 5 areas. Upgrade to Growth for ongoing monthly monitoring to protect the gains post-implementation.',
         features: [
           'Full POS & systems audit across all F&B areas',
@@ -2454,9 +2455,9 @@ Reach out and we'll find the right approach for your situation.</div>
       },
       critical: {
         label: 'RECOMMENDED SERVICE  -  URGENT',
-        package: 'Essential + Growth',
-        price: 'IDR 30M setup + IDR 5M / month',
-        why: 'Multiple systems are broken or absent. Every week without action compounds the loss shown above. Essential rebuilds across all 5 areas. Growth monitoring is strongly recommended at this level to sustain recovery.',
+        package: 'Growth Package',
+        price: '',
+        why: 'Multiple systems are broken or absent. Every week without action compounds the loss shown above. The Growth Package is the complete solution — it rebuilds across all 5 areas and includes monthly monitoring to sustain recovery.',
         features: [
           'Immediate audit and triage across all 5 areas',
           'Full recipe costing and cost database rebuild',
@@ -2474,7 +2475,7 @@ Reach out and we'll find the right approach for your situation.</div>
       '<div class="diag-service-rec">' +
       '<span class="diag-rec-label">' + rec.label + '</span>' +
       '<div class="diag-rec-package">' + rec.package + '</div>' +
-      '<div class="diag-rec-price">' + rec.price + '</div>' +
+      
       '<div class="diag-rec-why">' + rec.why + '</div>' +
       '<ul class="diag-rec-features">' + featHtml + '</ul>' +
       '<div class="diag-rec-alt">' + rec.alt + '</div>' +
@@ -2501,47 +2502,140 @@ Reach out and we'll find the right approach for your situation.</div>
     var leakLine = Math.round(leakMin*100) + '% - ' + Math.round(leakMax*100) + '% of revenue';
     var revLine  = rev > 0 ? formatCurrency(lossMin, currency) + ' - ' + formatCurrency(lossMax, currency) + ' per month' : 'Revenue not provided';
 
-    var emailBody = [
-      'PISAU F&B PROFIT DIAGNOSTIC - NEW SUBMISSION',
-      '============================================',
-      '',
-      '--- USER INFORMATION ---',
-      'NAME: ' + diagUserData.fname + ' ' + diagUserData.lname,
-      'EMAIL: ' + diagUserData.email,
-      '',
-      '--- DIAGNOSTIC RESULTS ---',
-      'TOTAL SCORE: ' + total + '/25 - ' + tierLabel,
-      'OPERATIONAL MATURITY: ' + maturityPct + '%',
-      'ESTIMATED PROFIT LEAK: ' + leakLine,
-      'ESTIMATED MONTHLY LOSS: ' + revLine,
-      'RECOMMENDED PACKAGE: ' + rec.package,
-      'SUBMITTED: ' + new Date().toLocaleString('en-GB', {timeZone:'Asia/Makassar'}) + ' WITA',
-      '',
-      'AREA SCORES:',
-      areaText,
-      '',
-      '----',
-      'Submitted via Pisau website profit diagnostic tool.'
-    ].join('\n');
+    // Build area breakdown lines
+    var areaLines = Object.keys(areaScores).map(function(k){
+      var score = areaScores[k];
+      var bar = '';
+      for (var i = 1; i <= 5; i++) { bar += (i <= score ? '█' : '░'); }
+      var status = score >= 4 ? 'Good' : score >= 3 ? 'Needs Attention' : 'Critical';
+      return '  ' + AREA_NAMES[k] + ': ' + bar + ' ' + score + '/5 (' + status + ')';
+    }).join('\n');
 
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: '5804c5a7-75b3-4018-bf2c-9f4d43857a99',
-        subject: 'Profit Diagnostic - ' + diagUserData.fname + ' ' + diagUserData.lname + ' | Score: ' + total + '/25 (' + tierLabel + ')',
-        from_name: 'Pisau Diagnostic Tool',
-        name: diagUserData.fname + ' ' + diagUserData.lname,
-        email: diagUserData.email,
-        message: emailBody
+    // Build recommended add-ons list
+    var addonLines = [];
+    if (areaScores.a1 <= 3) addonLines.push('  • Menu Engineering Consultation — identify your profit stars and reprice for maximum margin');
+    if (areaScores.a2 <= 2) addonLines.push('  • TSpoonLab Advanced Training — unlock real-time COGS monitoring and variance tracking');
+    if (areaScores.a3 <= 3) addonLines.push('  • Supplier Sourcing & Negotiation — reduce procurement costs at the source');
+    if (areaScores.a3 <= 2) addonLines.push('  • Kitchen Layout & Equipment Design — fix workflow inefficiencies that drive waste');
+    if (areaScores.a4 <= 2) addonLines.push('  • SOP Development Package — custom operating procedures to enforce cost discipline daily');
+    if (areaScores.a4 <= 3) addonLines.push('  • Culinary Team Workshop — build a cost-conscious kitchen culture on the floor');
+    if (areaScores.a5 <= 2) addonLines.push('  • Quarterly Business Review — high-level performance insights for owners and investors');
+    var addonText = addonLines.length > 0 ? addonLines.join('\n') : '  No add-ons triggered. Your operation is running well in all areas.';
+
+    // Build area score rows — clean label format (no monospace padding)
+    var areaRows = Object.keys(areaScores).map(function(k){
+      var name = AREA_NAMES[k];
+      var score = areaScores[k];
+      var status = score >= 4 ? 'Good' : score === 3 ? 'Needs Attention' : 'Critical';
+      return name + ': ' + score + '/5 (' + status + ')';
+    }).join('\n');
+
+    // Build add-ons
+    var addonList = [];
+    if (areaScores.a1 <= 3) addonList.push('- Menu Engineering Consultation');
+    if (areaScores.a2 <= 2) addonList.push('- TSpoonLab Advanced Training');
+    if (areaScores.a3 <= 3) addonList.push('- Supplier Sourcing & Negotiation');
+    if (areaScores.a3 <= 2) addonList.push('- Kitchen Layout & Equipment Design');
+    if (areaScores.a4 <= 2) addonList.push('- SOP Development Package');
+    if (areaScores.a4 <= 3) addonList.push('- Culinary Team Workshop');
+    if (areaScores.a5 <= 2) addonList.push('- Quarterly Business Review');
+    var addonText = addonList.length > 0 ? addonList.join('\n') : '';
+
+    var leakPct = Math.round(leakMin*100) + '% - ' + Math.round(leakMax*100) + '%';
+    var revLine = rev > 0 ? formatCurrency(lossMin, currency) + ' - ' + formatCurrency(lossMax, currency) + ' per month' : 'Not provided';
+
+    // What this means — varies by tier, no apostrophes
+    var whatThisMeans;
+    if (total >= 22) {
+      whatThisMeans = 'Your operation is performing well above average for F&B in Southeast Asia. Strong systems are in place. Even so, a ' + leakPct + ' profit leak is still leaving money on the table every month. Our Advisory Retainer is designed for operations exactly like yours: to refine, benchmark, and protect the margins you have worked hard to build.';
+    } else if (total >= 17) {
+      whatThisMeans = 'Your operation has solid foundations but is quietly leaking ' + leakPct + ' of revenue every month. These gaps in food cost control, recipe management, or data visibility rarely feel urgent until they compound. The Essential Package is designed to close exactly these kinds of leaks efficiently, without disrupting your operation.';
+    } else if (total >= 11) {
+      whatThisMeans = 'At ' + leakPct + ' estimated profit leak, your operation is losing a significant amount of recoverable margin every month. These gaps in recipe costing, purchasing, and data visibility are common in growing F&B businesses and are entirely fixable with the right systems in place.';
+    } else {
+      whatThisMeans = 'Your diagnostic indicates serious operational gaps that are actively costing your business ' + leakPct + ' of revenue every month. Left unaddressed, these inefficiencies compound and become structural. The Growth Package addresses this comprehensively, from recipe costing and inventory control to data systems and team training. This is recoverable, but action is needed now.';
+    }
+
+    // Package description line
+    var pkgDesc;
+    if (total >= 22) {
+      pkgDesc = 'Includes weekly data collection, monthly performance report, ongoing advisory support, and quarterly strategic review.';
+    } else if (total >= 17) {
+      pkgDesc = 'Includes full POS and systems audit, recipe costing database, TSpoonLab setup and training, theoretical vs. actual food cost model, and final validation report.';
+    } else {
+      pkgDesc = 'Includes full audit, recipe costing, TSpoonLab setup, inventory controls, staff training, and monthly monitoring.';
+    }
+
+    var emailBody = [
+      'Hi ' + diagUserData.fname + ',',
+      '',
+      'Thank you for taking the time to complete our F&B Profit Diagnostic.',
+      'Your results are below.',
+      '',
+      '--',
+      'DIAGNOSTIC SUMMARY',
+      '',
+      'Overall Score: ' + total + ' / 25',
+      'Operational Maturity: ' + maturityPct + '%',
+      'Maturity Tier: ' + tierLabel,
+      'Estimated Leak: ' + leakPct + ' of monthly revenue',
+      rev > 0 ? 'Estimated Loss: ' + revLine : '',
+      '',
+      '--',
+      'AREA SCORES',
+      '',
+      areaRows,
+      '',
+      '--',
+      'WHAT THIS MEANS',
+      '',
+      whatThisMeans,
+      '',
+      '--',
+      'RECOMMENDED SERVICE',
+      '',
+      rec.package,
+      '',
+      pkgDesc,
+      '',
+      addonList.length > 0 ? 'Suggested add-ons based on your scores:\n' + addonText : '',
+      '',
+      '--',
+      'NEXT STEP',
+      '',
+      'We review every diagnostic personally. If you would like to understand exactly where your margins are leaking and what it would take to recover them. We are happy to talk.',
+      '',
+      'Reply to this email or contact us at:',
+      'pisaufnbconsulting@gmail.com',
+      '',
+      'Warm regards,',
+      'Pisau F&B Profit Consulting',
+      'Bali, Indonesia'
+    ].filter(function(l){ return l !== undefined; }).join('\n');
+
+    // ── EmailJS: sends to client directly + BCC to Pisau ──
+    // Replace the 3 values below with your EmailJS credentials
+    var EMAILJS_SERVICE_ID  = 'service_0z20m6l';
+    var EMAILJS_TEMPLATE_ID = 'template_qwtno3w';
+    var EMAILJS_PUBLIC_KEY  = 'ZNjlnjEYGd6R1zMjS';
+
+    var templateParams = {
+      to_email:    diagUserData.email,
+      to_name:     diagUserData.fname + ' ' + diagUserData.lname,
+      bcc_email:   'pisaufnbconsulting@gmail.com',
+      reply_to:    'pisaufnbconsulting@gmail.com',
+      subject:     'Your Pisau F&B Profit Diagnostic Results',
+      message:     emailBody
+    };
+
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY)
+      .then(function() {
+        emailStatus.className = 'diag-email-status sent';
+        emailStatus.textContent = '* Your results have been sent to your email.';
       })
-    }).then(function(r){ return r.json(); })
-      .then(function(d){
-        if (d.success) {
-          emailStatus.className = 'diag-email-status sent';
-          emailStatus.textContent = '* Results sent to Pisau.';
-        } else { emailStatus.className = 'diag-email-status'; }
-      }).catch(function(){ emailStatus.className = 'diag-email-status'; });
+      .catch(function() {
+        emailStatus.className = 'diag-email-status';
+      });
   }
 
   function restartDiag() {
@@ -2606,19 +2700,14 @@ Reach out and we'll find the right approach for your situation.</div>
     if (inner !== undefined) parts.push(inner, '</', tag, '>');
     return parts.join('');
   }
-
   function getAreaScore(areaId) {
     var qs = Q_AREAS[areaId];
     var sum = 0;
     qs.forEach(function(qId) { sum += (qScores[qId] || 0); });
-    // Normalise to 1-5 scale (avg of questions in area)
     return Math.round(sum / qs.length);
   }
-
-  
-
-  
-
 </script>
+
+
 </body>
 </html>
