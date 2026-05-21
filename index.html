@@ -2556,15 +2556,17 @@ Reach out and we'll find the right approach for your situation.</div>
       whatThisMeans = 'Your diagnostic indicates serious operational gaps that are actively costing your business ' + leakPct + ' of revenue every month. Left unaddressed, these inefficiencies compound and become structural. The Growth Package addresses this comprehensively, from recipe costing and inventory control to data systems and team training. This is recoverable, but action is needed now.';
     }
 
-    // Package description line
-    var pkgDesc;
-    if (total >= 22) {
-      pkgDesc = 'Includes weekly data collection, monthly performance report, ongoing advisory support, and quarterly strategic review.';
-    } else if (total >= 17) {
-      pkgDesc = 'Includes full POS and systems audit, recipe costing database, TSpoonLab setup and training, theoretical vs. actual food cost model, and final validation report.';
-    } else {
-      pkgDesc = 'Includes full audit, recipe costing, TSpoonLab setup, inventory controls, staff training, and monthly monitoring.';
-    }
+// Package description line
+var pkgDesc;
+if (total >= 22) {
+  pkgDesc = 'Includes weekly data collection, monthly performance report, ongoing advisory support, and quarterly strategic review.';
+} else if (total >= 17) {
+  pkgDesc = 'Includes full POS and systems audit, recipe costing database, TSpoonLab setup and training, theoretical vs. actual food cost model, and final validation report.';
+} else if (total >= 11) {
+  pkgDesc = 'Includes full POS and systems audit, recipe costing database, TSpoonLab setup and training, theoretical vs. actual food cost model, final validation report, plus monthly advisory monitoring to protect and extend the gains.';
+} else {
+  pkgDesc = 'Includes immediate audit and triage, full recipe costing database rebuild, waste tracking and inventory control, TSpoonLab setup and live validation, and monthly monitoring to sustain recovery across all 5 areas.';
+}
 
     var emailBody = [
       'Hi ' + diagUserData.fname + ',',
