@@ -774,7 +774,11 @@
   .cmp-sel-btn.selected { background:var(--gold); border-color:var(--gold); color:var(--black); font-weight:700; }
   .cmp-sel-btn.disabled { opacity:.35; cursor:not-allowed; pointer-events:none; }
   .cmp-result-wrap { background:var(--card); border:1px solid var(--border); border-radius:4px; overflow:hidden; }
-  .cmp-table { width:100%; border-collapse:collapse; }
+  .cmp-scroll-wrap { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .cmp-scroll-wrap::-webkit-scrollbar { height:3px; }
+  .cmp-scroll-wrap::-webkit-scrollbar-track { background:var(--border); }
+  .cmp-scroll-wrap::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+  .cmp-table { width:100%; min-width:420px; border-collapse:collapse; }
   .cmp-table th { background:rgba(200,146,10,.08); color:var(--gold); font-family:'Montserrat',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:16px 18px; text-align:center; border-bottom:1px solid var(--border); }
   .cmp-table th.cmp-feat-col { text-align:left; color:var(--muted); font-size:9px; width:42%; }
   .cmp-table td { padding:12px 18px; font-size:12px; color:var(--muted); border-bottom:1px solid rgba(255,255,255,.04); text-align:center; }
@@ -784,6 +788,15 @@
   .cmp-no { color:rgba(255,255,255,.18); font-size:15px; }
   .cmp-price-row td { background:rgba(200,146,10,.06); color:var(--gold); font-weight:600; font-size:14px; font-family:'Cormorant Garamond',serif; border-bottom:none; }
   .cmp-price-row td.cmp-feat { color:var(--white); font-size:10px; letter-spacing:1.5px; text-transform:uppercase; font-family:'Montserrat',sans-serif; font-weight:600; }
+
+  @media (max-width: 480px) {
+    .cmp-sel-btn { padding:9px 14px; font-size:9px; letter-spacing:1px; }
+    .cmp-table { min-width:340px; }
+    .cmp-table th { font-size:9px; letter-spacing:1px; padding:12px 10px; }
+    .cmp-table td { font-size:11px; padding:10px 10px; }
+    .cmp-table td.cmp-feat { font-size:10px; }
+    .cmp-price-row td { font-size:12px; }
+  }
 
   /* CTA */
   .diag-cta-block {
@@ -837,6 +850,30 @@
     .diag-score-btn .score-num { font-size:22px; }
     .diag-leak-numbers { flex-direction:column; gap:12px; }
     .diag-revenue-block { padding:20px 18px; }
+
+    /* Section general */
+    .section { padding:32px 16px 48px; }
+
+    /* Compare selectors — wrap tightly on mobile */
+    #compareSelectors { gap:8px; }
+    .cmp-sel-btn { padding:9px 12px; font-size:9px; letter-spacing:1px; flex:1 1 calc(50% - 8px); text-align:center; }
+
+    /* Compare table scroll */
+    .cmp-scroll-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .cmp-table { min-width:340px; }
+    .cmp-table th { font-size:9px; letter-spacing:1px; padding:12px 10px; }
+    .cmp-table td { font-size:10px; padding:10px 8px; }
+    .cmp-table td.cmp-feat { font-size:10px; }
+    .cmp-price-row td { font-size:12px; padding:12px 8px; }
+
+    /* Packages horizontal scroll — ensure visible on mobile */
+    .packages-grid { gap:14px; padding-bottom:12px; }
+    .pkg-card { min-width:240px; max-width:260px; padding:24px 20px; }
+
+    /* Stats bar */
+    .stats-bar { flex-direction:column; gap:16px; }
+    .stat-item { border-left:none; border-top:1px solid var(--border); padding:16px 0 0; }
+    .stat-item:first-child { border-top:none; padding-top:0; }
   }
 </style>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -2075,20 +2112,25 @@
 
     result.style.display = 'block';
     result.innerHTML =
-      '<div class="cmp-result-wrap"><table class="cmp-table">' +
-        '<thead><tr>' +
-          '<th class="cmp-feat-col">Inclusion</th>' +
-          '<th>' + a.label + '<br><span style="font-size:9px;opacity:.7;font-weight:400;">' + a.type + '</span></th>' +
-          '<th>' + b.label + '<br><span style="font-size:9px;opacity:.7;font-weight:400;">' + b.type + '</span></th>' +
-        '</tr></thead>' +
-        '<tbody>' + rows +
-          '<tr class="cmp-price-row">' +
-            '<td class="cmp-feat">Investment</td>' +
-            '<td>' + a.price + '</td>' +
-            '<td>' + b.price + '</td>' +
-          '</tr>' +
-        '</tbody>' +
-      '</table></div>' +
+      '<div class="cmp-result-wrap">' +
+        '<p style="font-size:9px;color:rgba(200,146,10,0.45);text-align:center;padding:8px 0 0;letter-spacing:1.5px;text-transform:uppercase;">← Swipe to scroll →</p>' +
+        '<div class="cmp-scroll-wrap">' +
+          '<table class="cmp-table">' +
+            '<thead><tr>' +
+              '<th class="cmp-feat-col">Inclusion</th>' +
+              '<th>' + a.label + '<br><span style="font-size:9px;opacity:.7;font-weight:400;">' + a.type + '</span></th>' +
+              '<th>' + b.label + '<br><span style="font-size:9px;opacity:.7;font-weight:400;">' + b.type + '</span></th>' +
+            '</tr></thead>' +
+            '<tbody>' + rows +
+              '<tr class="cmp-price-row">' +
+                '<td class="cmp-feat">Investment</td>' +
+                '<td>' + a.price + '</td>' +
+                '<td>' + b.price + '</td>' +
+              '</tr>' +
+            '</tbody>' +
+          '</table>' +
+        '</div>' +
+      '</div>' +
       '<div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">' +
         '<a href="https://wa.me/6285190828211?text=Hi%20Pisau!%20I%27ve%20compared%20your%20packages%20and%20would%20love%20to%20discuss%20the%20right%20fit%20for%20my%20operation." target="_blank" rel="noopener" class="btn-primary" style="text-decoration:none;">Contact Us</a>' +
         '<button class="btn-secondary" onclick="_resetCompare()" style="cursor:pointer;">Reset</button>' +
