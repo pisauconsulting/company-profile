@@ -172,15 +172,23 @@
     background:var(--gold); color:var(--black);
     font-size:9px; letter-spacing:2px; font-weight:700;
     padding:4px 10px; border-radius:1px;
+    max-width:calc(100% - 32px); text-align:center; line-height:1.4;
+    white-space:nowrap;
   }
   .potential-badge {
     position:absolute; top:16px; right:16px;
     background:transparent; border:1px solid var(--gold); color:var(--gold);
     font-size:9px; letter-spacing:2px; font-weight:600;
     padding:4px 10px; border-radius:1px;
+    max-width:calc(100% - 32px); text-align:center; line-height:1.4;
+    white-space:normal; word-break:break-word;
+  }
+  @media(max-width:480px) {
+    .pkg-card.potential .pkg-name { padding-top:58px; }
+    .potential-badge { font-size:8px; letter-spacing:1px; }
   }
 
-  .pkg-name { font-family:'Cormorant Garamond', serif; font-size:28px; font-weight:600; color:var(--white); margin-bottom:6px; line-height:1.1; }
+  .pkg-name { font-family:'Cormorant Garamond', serif; font-size:28px; font-weight:600; color:var(--white); margin-bottom:6px; line-height:1.1; padding-top:28px; }
   .pkg-tagline { font-size:11px; color:var(--muted); margin-bottom:22px; letter-spacing:.5px; line-height:1.6; }
   .pkg-price-row { display:flex; align-items:baseline; gap:8px; margin-bottom:6px; }
   .pkg-price { font-family:'Cormorant Garamond', serif; font-size:32px; font-weight:700; color:var(--gold); }
