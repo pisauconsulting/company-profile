@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pisauconsulting.com/sitemap.xml
