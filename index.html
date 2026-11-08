@@ -2304,7 +2304,7 @@
     // Store user data
     diagUserData.fname = fname;
     diagUserData.lname = lname;
-    diagUserData.email = email;
+    diagUserData.email = email; if (typeof gtag === 'function') { gtag('event', 'generate_lead', { lead_source: 'profit_diagnostic_gate' }); }
 
     // Show success message
     btn.textContent = 'Unlocking...';
@@ -2388,7 +2388,7 @@
   // Keep formatIDR as alias for backward compatibility
   function formatIDR(n) { return formatCurrency(n, 'IDR'); }
 
-  function showDiagResults() {
+  function showDiagResults() { if (typeof gtag === 'function') { gtag('event', 'diagnostic_completed', { diagnostic: 'fnb_profit_diagnostic' }); }
     // 1. Calculate area averages from individual question scores (23 questions across 5 areas)
     // Each area avg is rounded to 1 decimal (1-5 scale), summed to give total /25
     var areaAvgScores = {};
